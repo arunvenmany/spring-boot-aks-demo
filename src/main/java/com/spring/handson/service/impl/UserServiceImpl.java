@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @Service(value = "userService")
 public class UserServiceImpl implements UserService {
 	
@@ -18,13 +19,12 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	public List<User> findAll() {
-		List<User> list = new ArrayList<>();
-		userDao.findAll().iterator().forEachRemaining(list::add);
-		return list;
+		List<User> list = userDao.findAll();
+		return list.isEmpty()?new ArrayList<>():list;
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(String id) {
 		userDao.deleteById(id);
 	}
 
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findById(int id) {
+	public User findById(String id) {
 		Optional<User> optionalUser = userDao.findById(id);
 		return optionalUser.isPresent() ? optionalUser.get() : null;
 	}
