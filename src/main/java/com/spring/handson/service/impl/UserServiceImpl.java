@@ -1,5 +1,7 @@
 package com.spring.handson.service.impl;
 
+import com.spring.handson.exception.UserAuthFailedException;
+import com.spring.handson.model.LoginDto;
 import com.spring.handson.repository.UserRepository;
 import com.spring.handson.model.User;
 import com.spring.handson.model.UserDto;
@@ -29,11 +31,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findOne(String username) {
-		return userRepository.findByUsername(username);
-	}
-
-	@Override
 	public User findById(String id) {
 		Optional<User> optionalUser = userRepository.findById(id);
 		return optionalUser.isPresent() ? optionalUser.get() : null;
@@ -49,12 +46,17 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
-    @Override
+	@Override
+	public User authenticate(LoginDto loginInfo) {
+		return userRepository.findByUsernameAndPassword(loginInfo.getUsername(), loginInfo.getPassword()).orElseThrow(new UserAuthFailedException("Authentication Failed"));
+	}
+
+	@Override
     public User save(UserDto user) {
 	    User newUser = new User();
 	    newUser.setUsername(user.getUsername());
-	    newUser.setFirstName(user.getFirstName());
-	    newUser.setLastName(user.getLastName());
+	    newUser.setFirstname(user.getFirstname());
+	    newUser.setLastname(user.getLastname());
 	    newUser.setPassword(user.getPassword());
 		newUser.setAge(user.getAge());
 		newUser.setSalary(user.getSalary());

@@ -2,6 +2,7 @@ package com.spring.handson.controller;
 
 
 import com.spring.handson.model.ApiResponse;
+import com.spring.handson.model.LoginDto;
 import com.spring.handson.model.User;
 import com.spring.handson.model.UserDto;
 import com.spring.handson.service.UserService;
@@ -44,6 +45,10 @@ public class UserController {
         return new ApiResponse<>(HttpStatus.OK.value(), "User deleted successfully.", null);
     }
 
+    @PostMapping("/login")
+    public ApiResponse<User> login(@RequestBody LoginDto loginInfo){
+        return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.",userService.authenticate(loginInfo));
+    }
 
 
 }
