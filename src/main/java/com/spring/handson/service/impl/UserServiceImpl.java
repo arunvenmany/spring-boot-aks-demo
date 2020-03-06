@@ -1,6 +1,6 @@
 package com.spring.handson.service.impl;
 
-import com.spring.handson.dao.UserDao;
+import com.spring.handson.repository.UserRepository;
 import com.spring.handson.model.User;
 import com.spring.handson.model.UserDto;
 import com.spring.handson.service.UserService;
@@ -16,26 +16,26 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userRepository;
 
 	public List<User> findAll() {
-		List<User> list = userDao.findAll();
+		List<User> list = userRepository.findAll();
 		return list.isEmpty()?new ArrayList<>():list;
 	}
 
 	@Override
 	public void delete(String id) {
-		userDao.deleteById(id);
+		userRepository.deleteById(id);
 	}
 
 	@Override
 	public User findOne(String username) {
-		return userDao.findByUsername(username);
+		return userRepository.findByUsername(username);
 	}
 
 	@Override
 	public User findById(String id) {
-		Optional<User> optionalUser = userDao.findById(id);
+		Optional<User> optionalUser = userRepository.findById(id);
 		return optionalUser.isPresent() ? optionalUser.get() : null;
 	}
 
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         User user = findById(userDto.getId());
         if(user != null) {
             BeanUtils.copyProperties(userDto, user, "password", "username");
-            userDao.save(user);
+            userRepository.save(user);
         }
         return userDto;
     }
@@ -58,6 +58,6 @@ public class UserServiceImpl implements UserService {
 	    newUser.setPassword(user.getPassword());
 		newUser.setAge(user.getAge());
 		newUser.setSalary(user.getSalary());
-        return userDao.save(newUser);
+        return userRepository.save(newUser);
     }
 }

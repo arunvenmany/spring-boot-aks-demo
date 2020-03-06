@@ -1,20 +1,19 @@
 package com.spring.handson.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-public class User {
 
+@Document(collection = "#{@applicationConfig.getCollectionName()}")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class User {
 
     @Id
     private String id;
-
     private String firstName;
     private String lastName;
-
-
     private String username;
     @JsonIgnore
     private String password;

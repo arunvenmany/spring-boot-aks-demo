@@ -1,0 +1,69 @@
+security:
+  azureConn: false
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  profiles:
+    active: cloud
+  main:
+    allow-bean-definition-overriding: true
+
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        exclude: '*'
+    web:
+      base-path: /
+      path-mapping:
+        prometheus: metrics
+      exposure:
+        include: prometheus
+---
+spring:
+  profiles: local
+  data:
+    mongodb:
+      protocol: https
+      host: localhost
+      port: 27017
+      database: regDB
+      documentDb: false
+      collectionName: Users_v1
+      maxConnectionIdleTimeInMs: 30000
+
+security:
+  azureConn: false
+logging:
+  level:
+    root: INFO
+---
+
+spring:
+  profiles: cloud
+  data:
+    mongodb:
+      protocol: https
+      host: handsoncluster-lkj9o.azure.mongodb.net
+      replicaSet: HandsonCluster-shard-0
+      port: 27017
+      username: mongoUser
+      database: test
+      authentication-database: admin
+      collectionName: Users_v1
+      maxConnectionIdleTimeInMs: 1740000
+
+security:
+  azureConn: true
+logging:
+  level:
+    root: INFO
+
+---
