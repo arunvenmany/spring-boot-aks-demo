@@ -4,7 +4,7 @@
 
 In the project directory, you can run:
 
-Service Swagger can be accessed [http://spring-react-aks-app-service.eastasia.cloudapp.azure.com/swagger-ui.html](here)
+Service Swagger can be accessed [http://spring-react-aks-app-service.eastasia.cloudapp.azure.com/swagger-ui.html](http://spring-react-aks-app-service.eastasia.cloudapp.azure.com/swagger-ui.html)
 
 ### `gradlew bootRun -Dspring.data.mongodb.password=<your mongo password>`
 
