@@ -29,11 +29,11 @@ Go to build/libs folder and Run java -jar -Dspring.profiles.active=local spring-
 ```  
 docker login http://aksspringreacthandson.azurecr.io -u aksspringreacthandson -p <password>
 
-docker build -t aksspringreacthandson.azurecr.io/react-app:1.0.1 .
+docker build -t aksspringreacthandson.azurecr.io/spring-boot-aks-app:1.0.1 .
 
-docker run -p 5000:5000 aksspringreacthandson.azurecr.io/react-app:1.0.1
+docker run -p 5000:5000 aksspringreacthandson.azurecr.io/spring-boot-aks-app:1.0.1
 
-docker push aksspringreacthandson.azurecr.io/react-app:1.0.1
+docker push aksspringreacthandson.azurecr.io/spring-boot-aks-app:1.0.1
 ```
 ### `Deploy to Kubernetes from Local using Helm`
 ```
