@@ -40,7 +40,6 @@ docker push aksspringreacthandson.azurecr.io/spring-boot-aks-app:1.0.1
  helm upgrade --install spring-boot-aks-app ./infra/helm/ --install --set dockerTag=1.0.1 --values infra/helm/values.yaml --set mongoPassword=<mongo_password> --namespace handson
 Release "spring-boot-aks-app" does not exist. Installing it now.
 NAME:   spring-boot-aks-app
-LAST DEPLOYED: Fri Mar  6 15:48:28 2020
 NAMESPACE: handson
 STATUS: DEPLOYED
 
