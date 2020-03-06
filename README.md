@@ -1,10 +1,13 @@
 # Handson of Building Java REST API using Spring Boot and MongoDB
 
+Service Swagger can be accessed [http://spring-react-aks-app-service.eastasia.cloudapp.azure.com/swagger-ui.html](http://spring-react-aks-app-service.eastasia.cloudapp.azure.com/swagger-ui.html)
+
+[![Build Status](https://dev.azure.com/reactHandson/spring-react-aks-app/_apis/build/status/spring-boot-aks-app-Azure%20Kubernetes%20Service%20-CI?branchName=master)](https://dev.azure.com/reactHandson/spring-react-aks-app/_build/latest?definitionId=4&branchName=master)
 ## Available Scripts
 
 In the project directory, you can run:
 
-Service Swagger can be accessed [http://spring-react-aks-app-service.eastasia.cloudapp.azure.com/swagger-ui.html](http://spring-react-aks-app-service.eastasia.cloudapp.azure.com/swagger-ui.html)
+
 
 ### `gradlew bootRun -Dspring.data.mongodb.password=<your mongo password>`
 
