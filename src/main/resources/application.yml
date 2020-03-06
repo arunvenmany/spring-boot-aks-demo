@@ -43,7 +43,7 @@ security:
   azureConn: false
 logging:
   level:
-    root: INFO
+    root: DEBUG
 ---
 
 spring:
@@ -64,6 +64,6 @@ security:
   azureConn: true
 logging:
   level:
-    root: INFO
+    root: ERROR
 
 ---

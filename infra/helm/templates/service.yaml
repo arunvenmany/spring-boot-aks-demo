@@ -1,0 +1,17 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: spring-react-aks-app-service
+  name: {{ .Values.appName }}-svc
+  namespace: handson
+spec:
+  loadBalancerIP: 20.189.120.135
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: {{ .Values.appName }}

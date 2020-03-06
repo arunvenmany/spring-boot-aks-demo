@@ -1,0 +1,10 @@
+dockerImage: aksspringreacthandson.azurecr.io/spring-boot-aks-app
+dockerTag: 1.0.1
+appName: spring-boot-aks-app
+
+
+javaopts: >-
+  -Dspring.data.mongodb.collectionName=Users_v1
+  -Xmx1024m
+  -Xms512m
+  -Dspring.profiles.active=cloud

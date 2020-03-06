@@ -3,6 +3,8 @@ package com.spring.handson.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -14,7 +16,6 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
 
     @Value("${spring.data.mongodb.collectionName}")
     private String collectionName;
-
 
     public String getCollectionName() {
         return collectionName;
@@ -34,4 +35,13 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    @Bean
+    public FilterRegistrationBean filterBean() {
+        final FilterRegistrationBean filterRegBean = new FilterRegistrationBean();
+        filterRegBean.setFilter(new LoggingFilter("x-transaction-id"));
+        filterRegBean.addUrlPatterns("/users/*");
+        filterRegBean.setEnabled(Boolean.TRUE);
+        filterRegBean.setName("Requestloggingfilter");
+        return filterRegBean;
+    }
 }

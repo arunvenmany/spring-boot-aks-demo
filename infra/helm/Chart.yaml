@@ -1,0 +1,10 @@
+apiVersion: v1
+name: spring-boot-aks-mongo-demo
+version: 1
+description:  Spring Boot Application with mongo db
+home: https://github.com/arunvenmany/spring-boot-aks-demo
+sources:
+  - https://github.com/arunvenmany/spring-boot-aks-demo
+maintainers:
+  - name: Arun Venmany
+    email: arunvenmany@outlook.com
