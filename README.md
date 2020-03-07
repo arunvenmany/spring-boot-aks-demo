@@ -21,10 +21,16 @@ Runs the app in the development mode in local with local database.<br>
 Open [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to view it in the browser.
 Make sure the db is up and running
 
+
+### `gradlew test`
+
+Run Unit Tests in local.
+
+
 ### `gradlew build`
 
-Builds your java jar file
-Go to build/libs folder and Run java -jar -Dspring.profiles.active=local spring-boot-aks-demo.jar to Run in local
+Builds your java jar file.
+Go to build/libs folder and Run java -jar -Dspring.profiles.active=local spring-boot-aks-demo.jar to Run in local.
 
 
 ### `Build and Run in docker in local`

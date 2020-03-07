@@ -1,0 +1,5 @@
+{
+  "status": 400,
+  "message": "Server Error due to Mongo Connectivity. Please check logs with x-transaction-id",
+  "result": null
+}

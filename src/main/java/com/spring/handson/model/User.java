@@ -76,4 +76,55 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
+
+    public static final class UserBuilder {
+        private User user;
+
+        private UserBuilder() {
+            user = new User();
+        }
+
+        public static UserBuilder anUser() {
+            return new UserBuilder();
+        }
+
+        public UserBuilder withId(String id) {
+            user.setId(id);
+            return this;
+        }
+
+        public UserBuilder withFirstname(String firstname) {
+            user.setFirstname(firstname);
+            return this;
+        }
+
+        public UserBuilder withLastname(String lastname) {
+            user.setLastname(lastname);
+            return this;
+        }
+
+        public UserBuilder withUsername(String username) {
+            user.setUsername(username);
+            return this;
+        }
+
+        public UserBuilder withPassword(String password) {
+            user.setPassword(password);
+            return this;
+        }
+
+        public UserBuilder withSalary(long salary) {
+            user.setSalary(salary);
+            return this;
+        }
+
+        public UserBuilder withAge(int age) {
+            user.setAge(age);
+            return this;
+        }
+
+        public User build() {
+            return user;
+        }
+    }
 }

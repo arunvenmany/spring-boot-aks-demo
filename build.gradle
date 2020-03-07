@@ -1,6 +1,7 @@
 buildscript {
 	ext {
 		springBootVersion = '2.1.1.RELEASE'
+		restAssuredVersion = '3.1.1'
 	}
 	repositories {
 		mavenLocal()
@@ -22,14 +23,26 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
 	compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
-
 	compile "io.micrometer:micrometer-registry-prometheus:1.0.6"
 	compile "io.micrometer:micrometer-core:1.0.6"
 	compile "io.springfox:springfox-swagger2:2.9.2"
 	compile "io.springfox:springfox-swagger-ui:2.9.2"
+
+	testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+	testCompile "io.rest-assured:spring-mock-mvc:${restAssuredVersion}"
+	testCompile "io.rest-assured:json-schema-validator:${restAssuredVersion}"
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
+	testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '2.22.0'
+	testCompile "org.junit.jupiter:junit-jupiter-engine:5.2.0"
+	testRuntime("org.junit.platform:junit-platform-launcher:1.2.0")
+	testRuntime("org.junit.vintage:junit-vintage-engine:5.2.0")
 }
 
 bootJar {
 	mainClassName = 'com.spring.handson.Application'
 	baseName = 'spring-boot-aks-app'
+}
+
+test {
+	useJUnitPlatform()
 }

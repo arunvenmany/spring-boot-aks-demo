@@ -1,0 +1,22 @@
+{
+  "status": 200,
+  "message": "User list fetched successfully.",
+  "result": [
+    {
+      "id": "id1",
+      "firstname": "test-first-name-1",
+      "lastname": "test-last-name-1",
+      "username": "test-user-name-1",
+      "salary": 20000,
+      "age": 25
+    },
+    {
+      "id": "id2",
+      "firstname": "test-first-name-2",
+      "lastname": "test-last-name-2",
+      "username": "test-user-name-2",
+      "salary": 30000,
+      "age": 26
+    }
+  ]
+}
