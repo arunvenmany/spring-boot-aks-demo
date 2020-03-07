@@ -34,7 +34,7 @@ spring:
       protocol: https
       host: localhost
       port: 27017
-      database: regDB
+      database: test
       documentDb: false
       collectionName: Users_v1
       maxConnectionIdleTimeInMs: 30000

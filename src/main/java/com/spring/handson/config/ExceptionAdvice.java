@@ -13,8 +13,8 @@ public class ExceptionAdvice {
 
     private Logger logger = LoggerFactory.getLogger(ExceptionAdvice.class);
 
-    @ExceptionHandler(RuntimeException.class)
-    public ApiResponse handleNotFoundException(RuntimeException ex) {
+    @ExceptionHandler(Exception.class)
+    public ApiResponse handleNotFoundException(Exception ex) {
         logger.error("Runtime Exception: {}", ex);
 
         ApiResponse apiResponse = new ApiResponse(400, "Server Error. Please check logs", null);

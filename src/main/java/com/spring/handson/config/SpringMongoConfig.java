@@ -40,7 +40,7 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
     @Value("${security.azureConn:false}")
     private boolean azureConn;
 
-    public static final String APPLICATION_NAME = "payment-service-webservice";
+    public static final String APPLICATION_NAME = "spring-boot-aks-app";
 
 
     @Override
@@ -51,7 +51,6 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        // TODO Auto-generated method stub
         return database;
     }
 

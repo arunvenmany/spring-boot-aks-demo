@@ -8,7 +8,7 @@ public class UserAuthFailedException extends RuntimeException implements Supplie
     }
 
     public UserAuthFailedException() {
-
+        super();
     }
 
     @Override
