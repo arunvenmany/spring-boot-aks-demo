@@ -28,18 +28,24 @@ Go to build/libs folder and Run java -jar -Dspring.profiles.active=local spring-
 
 
 ### `Build and Run in docker in local`
+
+Build the Docker with Specified <docker_tag>
+
+Note: Make sure that you have built your application jar file for your docker image using gradlew build.
+
+ 
 ```  
 docker login http://aksspringreacthandson.azurecr.io -u aksspringreacthandson -p <password>
 
-docker build -t aksspringreacthandson.azurecr.io/spring-boot-aks-app:1.0.1 .
+docker build -t aksspringreacthandson.azurecr.io/spring-aks-app:<docker_tag> .
 
-docker run -p 5000:5000 aksspringreacthandson.azurecr.io/spring-boot-aks-app:1.0.1
+docker run -p 8080:8080 aksspringreacthandson.azurecr.io/spring-aks-app:<docker_tag>
 
-docker push aksspringreacthandson.azurecr.io/spring-boot-aks-app:1.0.1
+docker push aksspringreacthandson.azurecr.io/spring-aks-app:<docker_tag>
 ```
 ### `Deploy to Kubernetes from Local using Helm`
 ```
- helm upgrade --install spring-boot-aks-app ./infra/helm/ --install --set dockerTag=1.0.1 --values infra/helm/values.yaml --set mongoPassword=<mongo_password> --namespace handson
+ helm upgrade --install spring-boot-aks-app ./infra/helm/ --install --set dockerTag=<docker_tag> --values infra/helm/values.yaml --set mongoPassword=<mongo_password> --namespace handson
 Release "spring-boot-aks-app" does not exist. Installing it now.
 NAME:   spring-boot-aks-app
 NAMESPACE: handson

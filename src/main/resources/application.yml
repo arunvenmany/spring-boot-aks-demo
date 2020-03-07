@@ -15,17 +15,17 @@ management:
   endpoint:
     prometheus:
       enabled: true
+    health:
+      enabled: true
   endpoints:
     enabled-by-default: false
-    jmx:
-      exposure:
-        exclude: '*'
     web:
       base-path: /
       path-mapping:
         prometheus: metrics
+        health: health
       exposure:
-        include: prometheus
+        include: prometheus,health
 ---
 spring:
   profiles: local

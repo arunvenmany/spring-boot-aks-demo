@@ -18,6 +18,22 @@ spec:
         - name: {{ .Values.appName }}
           image: {{ template "docker-image" . }}
           imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 1
+            livenessProbe:
+              httpGet:
+                path: /health
+                port: 8080
+              initialDelaySeconds: 60
+              timeoutSeconds: 10
+              periodSeconds: 10
+              failureThreshold: 1
           ports:
             - containerPort: 80
           env:
