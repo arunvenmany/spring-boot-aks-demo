@@ -1,17 +1,14 @@
 package com.spring.handson.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@ConfigurationProperties
-@EnableConfigurationProperties
 public class ApplicationConfig extends WebMvcConfigurerAdapter {
 
     @Value("${spring.data.mongodb.collectionName}")
@@ -43,5 +40,15 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
         filterRegBean.setEnabled(Boolean.TRUE);
         filterRegBean.setName("Requestloggingfilter");
         return filterRegBean;
+    }
+
+
+    public static final String ALLOWED_ORIGINS = "*";
+
+    @Override
+    public void addCorsMappings(final CorsRegistry registry) {
+        registry.addMapping("/users/**")
+                .allowedOrigins(ALLOWED_ORIGINS)
+                .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
     }
 }
