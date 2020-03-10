@@ -19,7 +19,7 @@ volumes: [
  
     stage('Build') {
       container('gradle') {
-        sh "gradle build"
+        sh "gradle build -g /home/gradle/"
       }
     }
     stage('Create Docker images') {
