@@ -51,7 +51,7 @@ docker push aksspringreacthandson.azurecr.io/spring-aks-app:<docker_tag>
 ```
 ### `Deploy to Kubernetes from Local using Helm`
 ```
- helm upgrade --install spring-boot-aks-app ./infra/helm/ --install --set dockerTag=<docker_tag> --values infra/helm/values.yaml --set mongoPassword=<mongo_password> --namespace handson
+ helm upgrade --install spring-boot-aks-app ./infra/helm/  --set dockerTag=<docker_tag> --values infra/helm/values.yaml --set mongoPassword=<mongo_password> --namespace handson
 Release "spring-boot-aks-app" does not exist. Installing it now.
 NAME:   spring-boot-aks-app
 NAMESPACE: handson
