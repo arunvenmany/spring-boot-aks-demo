@@ -52,14 +52,14 @@ volumes: [
         }
       }
     }
-    stage('Run kubectl') {
-      container('kubectl') {
-        sh "kubectl get pods"
-      }
-    }
-    stage('Run helm') {
+    
+    stage('Deploy to Kubernetes') {
       container('helm') {
-        sh "helm list"
+         withCredentials([[$class: 'UsernamePasswordMultiBinding',
+          credentialsId: 'mongo-password',
+          usernameVariable: 'MONGO_USER',
+          passwordVariable: 'MONGO_PASSWORD']]) {
+        sh "helm upgrade --install spring-boot-aks-app ./infra/helm/ --install --set dockerTag=${gitCommit} --values infra/helm/values.yaml --set mongoPassword= ${MONGO_PASSWORD} --namespace handson "
       }
     }
   }
