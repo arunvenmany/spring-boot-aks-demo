@@ -61,7 +61,8 @@ volumes: [
           passwordVariable: 'MONGO_PASSWORD']]) {
         sh """
         helm init --client-only --skip-refresh
-        helm upgrade  spring-boot-aks-app ./infra/helm/ --values infra/helm/values.yaml --set \\"dockerTag=${gitCommit}\\" --set \\"mongoPassword=${MONGO_PASSWORD}\\"   --namespace handson
+        helm template ./infra/helm/ --values infra/helm/values.yaml --set \\"dockerTag=${gitCommit}\\" --set \\"mongoPassword=${MONGO_PASSWORD}\\"  --namespace handson
+        helm upgrade  spring-boot-aks-app ./infra/helm/ --values infra/helm/values.yaml --set \\"dockerTag=${gitCommit}\\" --set \\"mongoPassword=${MONGO_PASSWORD}\\"   --namespace handson --install
         """
       }
      }
