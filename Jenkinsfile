@@ -1,7 +1,7 @@
 def label = "worker-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label, containers: [
-  containerTemplate(name: 'gradle', image: 'gradle:4.5.1-jdk8', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'gradle', image: 'gradle:4.8.1-jdk8', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.8', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true)
@@ -17,9 +17,25 @@ volumes: [
     def shortGitCommit = "${gitCommit[0..10]}"
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
  
+    stage('Test') {
+      try {
+        container('gradle') {
+          sh """
+            pwd
+            echo "GIT_BRANCH=${gitBranch}" 
+            echo "GIT_COMMIT=${gitCommit}" 
+            gradle test -g /home/gradle
+            """
+        }
+      }
+      catch (exc) {
+        println "Failed to test - ${currentBuild.fullDisplayName}"
+        throw(exc)
+      }
+    }
     stage('Build') {
       container('gradle') {
-        sh "gradle build -g /home/gradle/"
+        sh "gradle build -g /home/gradle"
       }
     }
     stage('Create Docker images') {
