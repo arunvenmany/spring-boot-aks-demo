@@ -39,6 +39,11 @@ spec:
           env:
             - name: JAVA_OPTS
               value: {{ .Values.javaopts }}  {{ template "mongo-password" . }}
+            - name: SECRETS_MONGO_USER_PASSWD
+              valueFrom:
+                 secretKeyRef:
+                   name: mongo-password
+                   key: spring.data.mongodb.password
       imagePullSecrets: 
        - name: regcred
       restartPolicy: Always

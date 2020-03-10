@@ -57,12 +57,9 @@ volumes: [
       container('helm') {
         withCredentials([string(credentialsId: 'mongoPassword', variable: 'MONGO_DB_PASSWORD')]) {
         sh """
-        set +x
-        MONGO_PASSWORD=`echo $MONGO_DB_PASSWORD`
-        echo $MONGO_PASSWORD
         helm init --client-only --skip-refresh
-        helm template ./infra/helm/ --values infra/helm/values.yaml --set \\"dockerTag=${gitCommit}\\" --set \\"mongoPassword=$MONGO_PASSWORD\\"  --namespace handson
-        helm upgrade  spring-boot-aks-app ./infra/helm/ --values infra/helm/values.yaml --set \\"dockerTag=${gitCommit}\\" --set \\"mongoPassword=${MONGO_PASSWORD}\\"   --namespace handson --install
+        helm template ./infra/helm/ --values infra/helm/values.yaml --set \\"dockerTag=${gitCommit}\\"  --namespace handson
+        helm upgrade  spring-boot-aks-app ./infra/helm/ --values infra/helm/values.yaml --set \\"dockerTag=${gitCommit}\\" --namespace handson --install
         """
       }
      }

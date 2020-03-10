@@ -59,6 +59,7 @@ spring:
       authentication-database: admin
       collectionName: Users_v1
       maxConnectionIdleTimeInMs: 1740000
+      password: ${SECRETS_MONGO_USER_PASSWD:demo}
 
 security:
   azureConn: true

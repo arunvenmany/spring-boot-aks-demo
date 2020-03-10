@@ -3,6 +3,8 @@
 Service Swagger can be accessed [here](http://spring-react-aks-app-service.eastasia.cloudapp.azure.com/swagger-ui.html)
 
 [![Build Status](https://dev.azure.com/reactHandson/spring-react-aks-app/_apis/build/status/spring-boot-aks-app-Azure%20Kubernetes%20Service%20-CI?branchName=master)](https://dev.azure.com/reactHandson/spring-react-aks-app/_build/latest?definitionId=4&branchName=master)
+
+Jenkins URL:- http://jenkins-service.eastasia.cloudapp.azure.com/job/spring-boot-aks/
 ## Available Scripts
 
 In the project directory, you can run:
@@ -50,8 +52,17 @@ docker run -p 8080:8080 aksspringreacthandson.azurecr.io/spring-aks-app:<docker_
 docker push aksspringreacthandson.azurecr.io/spring-aks-app:<docker_tag>
 ```
 ### `Deploy to Kubernetes from Local using Helm`
+
+Create Mongo Password Secret in Kubernetes and update whenever there is change
+
 ```
- helm upgrade --install spring-boot-aks-app ./infra/helm/  --set dockerTag=<docker_tag> --values infra/helm/values.yaml --set mongoPassword=<mongo_password> --namespace handson
+kubectl create secret generic mongo-password \
+--from-literal=spring.data.mongodb.password=<password> --namespace handson
+```
+
+Then Run Helm Install
+```
+helm upgrade --install spring-boot-aks-app ./infra/helm/  --set dockerTag=<docker_tag> --values infra/helm/values.yaml --namespace handson
 Release "spring-boot-aks-app" does not exist. Installing it now.
 NAME:   spring-boot-aks-app
 NAMESPACE: handson
