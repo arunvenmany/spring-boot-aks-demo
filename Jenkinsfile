@@ -17,22 +17,6 @@ volumes: [
     def shortGitCommit = "${gitCommit[0..10]}"
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
  
-    stage('Test') {
-      try {
-        container('gradle') {
-          sh """
-            pwd
-            echo "GIT_BRANCH=${gitBranch}" 
-            echo "GIT_COMMIT=${gitCommit}" 
-            gradle test -g /home/gradle
-            """
-        }
-      }
-      catch (exc) {
-        println "Failed to test - ${currentBuild.fullDisplayName}"
-        throw(exc)
-      }
-    }
     stage('Build') {
       container('gradle') {
         sh "gradle build"
