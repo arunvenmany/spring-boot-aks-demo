@@ -1,10 +1,15 @@
 def label = "worker-${UUID.randomUUID().toString()}"
-
+def helmInit() {
+    sh "helm init --client-only --skip-refresh"
+}
+def helmDeploy(){
+ sh "helm upgrade  spring-boot-aks-app ./infra/helm/  --install --set dockerTag=${gitCommit} --values infra/helm/values.yaml --set mongoPassword=${MONGO_PASSWORD} --namespace handson"
+}
 podTemplate(label: label, containers: [
   containerTemplate(name: 'gradle', image: 'gradle:4.8.1-jdk8', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.14.8', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.13.1', command: 'cat', ttyEnabled: true)
+  containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.8.2', command: 'cat', ttyEnabled: true)
 ],
 volumes: [
   hostPathVolume(mountPath: '/home/gradle/.gradle', hostPath: '/tmp/jenkins/.gradle'),
@@ -59,10 +64,8 @@ volumes: [
           credentialsId: 'mongo-password',
           usernameVariable: 'MONGO_USER',
           passwordVariable: 'MONGO_PASSWORD']]) {
-        sh """
-        helm init --client-only --skip-refresh
-        helm upgrade  spring-boot-aks-app ./infra/helm/  --install --set dockerTag=${gitCommit} --values infra/helm/values.yaml --set mongoPassword=${MONGO_PASSWORD} --namespace handson
-        """
+          helmInit()
+          helmDeploy()
       }
      }
     }
