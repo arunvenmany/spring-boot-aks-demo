@@ -25,7 +25,10 @@ $ helm install my-release stable/jenkins
 
 A major chart version change (like v0.40.0 -> v1.0.0) indicates that there is an incompatible breaking change needing manual actions.
 
-
+## Getting Admin Password
+```
+ printf $(kubectl get secret --namespace handson jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+```
 ### 1.0.0
 
 Breaking changes:
