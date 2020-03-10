@@ -55,10 +55,7 @@ volumes: [
 
     stage('Deploy to Kubernetes') {
       container('helm') {
-         withCredentials([[$class: 'UsernamePasswordMultiBinding',
-          credentialsId: 'mongo-password',
-          usernameVariable: 'MONGO_USER',
-          passwordVariable: 'MONGO_PASSWORD']]) {
+          withCredentials([string(credentialsId: 'mongoPassword', variable: 'MONGO_PASSWORD')]) {
         sh """
         helm init --client-only --skip-refresh
         helm template ./infra/helm/ --values infra/helm/values.yaml --set \\"dockerTag=${gitCommit}\\" --set \\"mongoPassword=${MONGO_PASSWORD}\\"  --namespace handson
