@@ -44,7 +44,9 @@ podTemplate(label: label, containers: [
                     sh """
             docker login http://aksspringreacthandson.azurecr.io -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
             docker build -t aksspringreacthandson.azurecr.io/spring-aks-app:${gitCommit} .
+            docker tag aksspringreacthandson.azurecr.io/spring-aks-app:${gitCommit}  aksspringreacthandson.azurecr.io/spring-aks-app:latest
             docker push aksspringreacthandson.azurecr.io/spring-aks-app:${gitCommit}
+            docker push aksspringreacthandson.azurecr.io/spring-aks-app:latest
             """
                 }
             }
@@ -54,7 +56,7 @@ podTemplate(label: label, containers: [
             container('helm') {
                 sh """
         helm init --client-only --skip-refresh
-        helm upgrade  spring-boot-aks-app ./infra/helm/ --install --namespace handson --set \\"dockerTag=${gitCommit}\\" --values infra/helm/values.yaml --wait  --force --recreate-pods
+        helm upgrade  spring-boot-aks-app ./infra/helm/ --install --namespace handson --values infra/helm/values.yaml --wait  --force --recreate-pods
         """
             }
         }

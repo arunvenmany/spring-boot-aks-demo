@@ -1,5 +1,5 @@
 dockerImage: aksspringreacthandson.azurecr.io/spring-aks-app
-dockerTag: 1.0.1
+dockerTag: latest
 appName: spring-boot-aks-app
 
 
