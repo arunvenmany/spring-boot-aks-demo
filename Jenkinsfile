@@ -52,13 +52,7 @@ volumes: [
         }
       }
     }
-    stage('Setup') {
-          container('kubectl') {
-            sh """kubectl apply -f ./infra/helm/rbac-config.yaml
-            kubectl get pods --namespace handson
-            """
-          }
-     }
+
     stage('Deploy to Kubernetes') {
       container('helm') {
          withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -67,7 +61,7 @@ volumes: [
           passwordVariable: 'MONGO_PASSWORD']]) {
         sh """
 
-        helm init --service-account tiller --upgrade
+        helm init --client-only --skip-refresh
         helm upgrade --install spring-boot-aks-app ./infra/helm/ --install --set dockerTag=${gitCommit} --values infra/helm/values.yaml --set mongoPassword= ${MONGO_PASSWORD} --namespace handson
         """
       }
