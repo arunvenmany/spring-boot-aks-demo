@@ -24,7 +24,7 @@ volumes: [
             pwd
             echo "GIT_BRANCH=${gitBranch}" 
             echo "GIT_COMMIT=${gitCommit}" 
-            gradle test
+            gradle test -g /home/gradle
             """
         }
       }
