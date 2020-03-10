@@ -3,6 +3,8 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: {{ .Values.appName }}
+  annotations:
+    timestamp: "{{ date "20060102150405" .Release.Time }}"
   namespace: handson
 spec:
   replicas: 2
