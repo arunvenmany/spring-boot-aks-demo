@@ -62,9 +62,9 @@ volumes: [
         sh """
         helm init --client-only --skip-refresh
         touch ./infra/helm/tmp-values.yaml
-        echo "dockerTag=${gitCommit} \n mongoPassword=${MONGO_PASSWORD}" >> ./infra/helm/tmp-values.yaml
+        echo "dockerTag=${gitCommit} \nmongoPassword=${MONGO_PASSWORD}" >> ./infra/helm/tmp-values.yaml
         cat ./infra/helm/tmp-values.yaml
-        helm upgrade  spring-boot-aks-app ./infra/helm/ --set dockerTag=${gitCommit} --values infra/helm/values.yaml --set  --namespace handson
+        helm upgrade  spring-boot-aks-app ./infra/helm/ --values ./infra/helm/tmp-values.yaml --values infra/helm/values.yaml --set  --namespace handson
         """
       }
      }
