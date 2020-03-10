@@ -3,7 +3,7 @@ def helmInit() {
     sh "helm init --client-only --skip-refresh"
 }
 def helmDeploy(){
- sh "helm upgrade  spring-boot-aks-app ./infra/helm/  --install --set dockerTag=${gitCommit} --values infra/helm/values.yaml --set mongoPassword=${MONGO_PASSWORD} --namespace handson"
+ sh "helm upgrade  spring-boot-aks-app ./infra/helm/  --install --set \\\"dockerTag=${gitCommit}\\\" --values infra/helm/values.yaml --set \\\"mongoPassword=${MONGO_PASSWORD}\\\" --namespace handson"
 }
 podTemplate(label: label, containers: [
   containerTemplate(name: 'gradle', image: 'gradle:4.8.1-jdk8', command: 'cat', ttyEnabled: true),
