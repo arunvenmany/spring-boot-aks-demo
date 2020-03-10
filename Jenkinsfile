@@ -16,7 +16,7 @@ volumes: [
     def gitBranch = myRepo.GIT_BRANCH
     def shortGitCommit = "${gitCommit[0..10]}"
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
- 
+    def MONGO_PASSWORD=""
     stage('Test') {
       try {
         container('gradle') {
