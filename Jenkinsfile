@@ -59,7 +59,10 @@ volumes: [
           credentialsId: 'mongo-password',
           usernameVariable: 'MONGO_USER',
           passwordVariable: 'MONGO_PASSWORD']]) {
-        sh "helm upgrade --install spring-boot-aks-app ./infra/helm/ --install --set dockerTag=${gitCommit} --values infra/helm/values.yaml --set mongoPassword= ${MONGO_PASSWORD} --namespace handson "
+        sh """
+        helm init --service-account tiller --upgrade
+        helm upgrade --install spring-boot-aks-app ./infra/helm/ --install --set dockerTag=${gitCommit} --values infra/helm/values.yaml --set mongoPassword= ${MONGO_PASSWORD} --namespace handson
+        """
       }
      }
     }
